@@ -1,0 +1,7 @@
+<Project>
+  <!-- Keep build output of the vendored SDK projects out of sdk/ (it is ~1 GB of precompiled headers and objects). -->
+  <PropertyGroup Condition="$(MSBuildProjectDirectory.StartsWith('$(MSBuildThisFileDirectory)sdk\', StringComparison.OrdinalIgnoreCase))">
+    <OutDir>$(MSBuildThisFileDirectory)build\sdk\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(MSBuildThisFileDirectory)build\obj\sdk\$(MSBuildProjectName)\$(Platform)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+</Project>

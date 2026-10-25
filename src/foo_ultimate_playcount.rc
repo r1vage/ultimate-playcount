@@ -1,0 +1,118 @@
+#include "resource.h"
+#include <winres.h>
+
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+
+IDD_PREFERENCES DIALOGEX 0, 0, 340, 140
+STYLE DS_SETFONT | WS_CHILD
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    GROUPBOX        "Counting",IDC_STATIC,7,7,326,123
+    LTEXT           "Count a play after:",IDC_STATIC,13,19,70,8
+    CONTROL         "",IDC_MODE_PERCENT,"Button",BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP,86,19,10,10
+    EDITTEXT        IDC_PERCENT,98,17,28,13,ES_NUMBER
+    LTEXT           "% of the track",IDC_STATIC,130,19,55,8
+    CONTROL         "",IDC_MODE_SECONDS,"Button",BS_AUTORADIOBUTTON,190,19,10,10
+    EDITTEXT        IDC_SECONDS,202,17,32,13,ES_NUMBER
+    LTEXT           "seconds",IDC_STATIC,238,19,30,8
+    CONTROL         "the track's end",IDC_MODE_END,"Button",BS_AUTORADIOBUTTON,268,19,62,10
+    LTEXT           "Seconds: or the whole track if it's shorter. Streams and tracks of unknown length: 60 seconds.",IDC_STATIC,13,35,314,16
+    CONTROL         "Ignore tracks outside of library (never count or rate them)",IDC_IGNORE_OUTSIDE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,13,59,314,10
+    CONTROL         "Log play counting details to the console",IDC_DEBUG,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,13,72,314,10
+    CONTROL         "Log every playback event foobar2000 sends (new track, stop, seek, edited, stream track info)",IDC_LOG_EVENTS,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,13,85,314,10
+    CONTROL         "Count skips: a track you stop or change after at least a second, before it counts as played",IDC_COUNT_SKIPS,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,13,98,314,10
+    LTEXT           "Shown by %upc_skipcount%, %upc_last_skipped% and %upc_last_skipped_ts%. A track that plays to its end is no skip.",IDC_STATIC,23,110,304,16
+END
+
+IDD_PREFS_RECORDS DIALOGEX 0, 0, 340, 267
+STYLE DS_SETFONT | WS_CHILD
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    GROUPBOX        "Records and fields (take effect after restart)",IDC_STATIC,7,7,326,208
+    LTEXT           "Record key (tracks with the same key share one record):",IDC_STATIC,13,19,314,8
+    EDITTEXT        IDC_KEY,13,30,314,13,ES_AUTOHSCROLL
+    LTEXT           "After a change, you're offered to move your data to the new keys at the next start.",IDC_STATIC,13,46,314,8
+    CONTROL         "Ignore upper/lower case in the key (""Of The"" and ""of the"" share one record)",IDC_IGNORE_CASE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,13,59,314,10
+    LTEXT           "Field prefix:",IDC_STATIC,13,77,45,8
+    EDITTEXT        IDC_PREFIX,60,75,60,13,ES_AUTOHSCROLL
+    LTEXT           "e.g. upc_ gives %upc_playcount%, 2003_ gives %2003_playcount%",IDC_STATIC,126,77,200,8
+    CONTROL         "Also provide foo_playcount fields:",IDC_LEGACY_NAMES,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,13,94,314,10
+    LTEXT           "%play_count% %first_played% %last_played% %added% %rating%",IDC_STATIC,23,106,304,8
+    LTEXT           "Don't enable this while foo_playcount is installed.",IDC_STATIC,23,118,304,8
+    CONTROL         "Also provide Enhanced Playback Statistics fields:",IDC_ENHANCED_NAMES,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,13,133,314,10
+    LTEXT           "%played_times% %played_times_js% %first_played_enhanced%",IDC_STATIC,23,145,304,8
+    LTEXT           "%last_played_enhanced% %added_enhanced%",IDC_STATIC,23,157,304,8
+    LTEXT           "Don't enable this while Enhanced Playback Statistics is installed.",IDC_STATIC,23,169,304,8
+    CONTROL         "Also provide Last.fm Playcount Sync fields:",IDC_LFM_NAMES,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,13,185,314,10
+    LTEXT           "%lfm_playcount% %lfm_first_played% %lfm_last_played% %lfm_loved%, with _ts and _ago",IDC_STATIC,23,197,304,8
+    LTEXT           "Don't enable this while Last.fm Playcount Sync is installed.",IDC_STATIC,23,209,304,8
+
+    GROUPBOX        "When tags are edited",IDC_STATIC,7,221,326,38
+    CONTROL         "Move the track's plays, dates and rating to its new tags",IDC_FOLLOW_EDITS,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,13,233,314,10
+    LTEXT           "Off: an edit that changes the key makes it a new song, the old record stays as it was.",IDC_STATIC,23,245,304,8
+END
+
+IDD_PREFS_LASTFM DIALOGEX 0, 0, 340, 225
+STYLE DS_SETFONT | WS_CHILD
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    GROUPBOX        "Last.fm numbers (asked for track by track)",IDC_STATIC,7,7,326,132
+    LTEXT           "User name:",IDC_STATIC,13,21,50,8
+    EDITTEXT        IDC_LASTFM_USER,66,19,120,13,ES_AUTOHSCROLL
+    LTEXT           "API key:",IDC_STATIC,13,38,50,8
+    EDITTEXT        IDC_LASTFM_KEY,66,36,200,13,ES_AUTOHSCROLL
+    LTEXT           "A free key: last.fm/api/account/create. Only public history can be read, no password is needed. Kept in foobar2000's settings.",IDC_STATIC,13,55,314,24
+    CONTROL         "Ask Last.fm about a track when it starts playing",IDC_LASTFM_UPDATE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,13,83,314,10
+    CONTROL         "Ask again half a minute after it ends, once the scrobble has arrived",IDC_LASTFM_ON_END,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,13,95,314,10
+    CONTROL         "Ask about all tracks slowly in the background (one every 10 seconds)",IDC_LASTFM_BACKGROUND,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,13,107,314,10
+    LTEXT           "Console summary after every",IDC_STATIC,13,123,100,8
+    EDITTEXT        IDC_LASTFM_SUMMARY,116,121,32,13,ES_NUMBER
+    LTEXT           "tracks looked up",IDC_STATIC,152,123,100,8
+    GROUPBOX        "Fields",IDC_STATIC,7,145,326,72
+    CONTROL         "Show the Last.fm or ListenBrainz play count instead of the local one when it is higher",IDC_LASTFM_FEEDS,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,13,157,314,10
+    LTEXT           "On: the standard play count shows the Last.fm or ListenBrainz count when higher than the local one, and first / last played the earliest / latest of all. Only fields change, never your records. Off: local plays only. lastfm_ fields always show Last.fm.",IDC_STATIC,23,169,304,44
+END
+
+IDD_PREFS_LISTENBRAINZ DIALOGEX 0, 0, 340, 80
+STYLE DS_SETFONT | WS_CHILD
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    GROUPBOX        "ListenBrainz history (Library > Ultimate Playcount > Sync ListenBrainz history)",IDC_STATIC,7,7,326,66
+    LTEXT           "User name:",IDC_STATIC,13,21,50,8
+    EDITTEXT        IDC_LB_USER,66,19,120,13,ES_AUTOHSCROLL
+    LTEXT           "Only public listens can be read, no token is needed. ListenBrainz has no per-track number to ask for, so the history is downloaded and counted per track here.",IDC_STATIC,13,38,314,30
+END
+
+IDD_PREFS_MAINTENANCE DIALOGEX 0, 0, 340, 106
+STYLE DS_SETFONT | WS_CHILD
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    GROUPBOX        "Cleanup (manual: Library > Ultimate Playcount > Clean database)",IDC_STATIC,7,7,326,44
+    CONTROL         "Automatically remove records of deleted files after",IDC_AUTO_CLEAN,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,13,19,180,10
+    EDITTEXT        IDC_AUTO_CLEAN_DAYS,195,17,32,13,ES_NUMBER
+    LTEXT           "days",IDC_STATIC,231,19,30,8
+    LTEXT           "Never rated or loved ones; skipped when the drive is offline. A backup is made first.",IDC_STATIC,23,34,304,8
+
+    GROUPBOX        "Backups (folder ultimate_playcount_backups in the profile)",IDC_STATIC,7,57,326,42
+    CONTROL         "Back up automatically at startup, every",IDC_AUTO_BACKUP,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,13,69,148,10
+    EDITTEXT        IDC_AUTO_BACKUP_DAYS,163,67,28,13,ES_NUMBER
+    LTEXT           "days",IDC_STATIC,195,69,30,8
+    LTEXT           "Keep at most",IDC_STATIC,13,84,46,8
+    EDITTEXT        IDC_BACKUP_KEEP,61,82,32,13,ES_NUMBER
+    LTEXT           "copies of each kind (automatic, before import, before cleanup...)",IDC_STATIC,97,84,230,8
+END
+
+IDD_CLEANUP DIALOGEX 0, 0, 500, 300
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Clean database - Ultimate Playcount"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    LTEXT           "",IDC_CLEAN_SUMMARY,7,7,486,26
+    LTEXT           "Ticked = keep as it is. Unticked ""tags changed"" records are merged into the current track (plays added up); unticked ""no track"" records are removed. A backup is made first.",IDC_STATIC,7,35,486,18
+    CONTROL         "",IDC_CLEAN_LIST,"SysListView32",LVS_REPORT | LVS_SHOWSELALWAYS | WS_BORDER | WS_TABSTOP,7,56,486,214
+    PUSHBUTTON      "Keep all with plays or ratings",IDC_KEEP_RATED,7,278,120,14
+    PUSHBUTTON      "Keep all",IDC_KEEP_ALL,131,278,50,14
+    PUSHBUTTON      "Keep none",IDC_KEEP_NONE,185,278,50,14
+    DEFPUSHBUTTON   "Apply",IDOK,389,278,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,443,278,50,14
+END

@@ -1,0 +1,7 @@
+<Project>
+  <!-- Loaded by every project in this tree, including the SDK's. sdk-output.props runs after each project's own
+       settings, just before the C++ targets compute output paths. -->
+  <PropertyGroup>
+    <ForceImportBeforeCppTargets>$(MSBuildThisFileDirectory)sdk-output.props</ForceImportBeforeCppTargets>
+  </PropertyGroup>
+</Project>
